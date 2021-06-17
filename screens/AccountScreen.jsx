@@ -1,64 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import jwtDecode from 'jwt-decode';
 
-import IconButton from '../components/UI/buttons/IconButton';
+import DashbordScreen from './auth/DashbordScreen';
+import SignInOrSignUp from '../components/auth/Sign-in-or-sign-up.component';
+import authStorage from '../store/authStorage';
+import authActions from '../redux/auth/auth.actions';
 
 const AccountScreen = () => {
-  return (
-    <View style={styles.container}>
-      <IconButton
-        title='Sign in with email'
-        icon='email-outline'
-        style={styles.email}
-      />
-      <View style={styles.or}>
-        <Text style={styles.orText}>or</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <IconButton title='Sign in with Google' icon='google' />
-        <IconButton title='Sign in with Facebook' icon='facebook' />
-        <IconButton title='Sign in with Apple' icon='apple' />
-      </View>
-      <TouchableOpacity style={styles.textContainer}>
-        <Text style={styles.text}>New here? Create an account</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const { user } = useSelector((state) => ({ ...state }));
+  let dispatch = useDispatch();
+
+  const getToken = async () => {
+    const token = await authStorage.getToken();
+    if (!token) return;
+    const user = await jwtDecode(token);
+    dispatch(authActions.currentUser(user));
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  return user.currentUser === null ? <SignInOrSignUp /> : <DashbordScreen />;
 };
 
 export default AccountScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#e63f5a',
-    overflow: 'hidden',
-    marginTop: 50,
-  },
-  email: {
-    marginTop: 60,
-  },
-  or: {
-    position: 'absolute',
-    top: 190,
-  },
-  orText: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  buttonContainer: {
-    width: '100%',
-    marginTop: '45%',
-    alignItems: 'center',
-  },
-  text: {
-    color: 'white',
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-  textContainer: {
-    marginTop: 30,
-  },
-});
+const styles = StyleSheet.create({});

@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AuthButton from '../buttons/AuthButton';
 
-const IconButton = ({ icon, title, style }) => {
+const IconButton = ({ icon, title, style, onPress }) => {
   return (
-    <AuthButton style={[styles.container, style]}>
+    <AuthButton style={[styles.container, style]} onPress={onPress}>
       <View style={styles.buttonIcon}>
         {icon && (
           <MaterialCommunityIcons name={icon} size={26} color='#ff449f' />

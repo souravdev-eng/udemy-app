@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { colors } from '../../config/colors';
@@ -7,8 +9,19 @@ import AppFormInput from '../../components/form/AppFormInput';
 import SubmitFormButton from '../../components/form/SubmitFormButton';
 import AppForm from '../../components/form/AppForm';
 import AppTextBold from '../../components/UI/typo-graphy/AppTextBold';
+import authActions from '../../redux/auth/auth.actions';
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
+  let dispatch = useDispatch();
+
+  const { user } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    if (user.currentUser !== null) {
+      props.navigation.navigate('Dashbord');
+    }
+  }, []);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label('Email'),
     password: Yup.string().required().min(4).label('Password'),
@@ -20,7 +33,10 @@ const LoginScreen = () => {
       <AppForm
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}>
+        onSubmit={({ email, password }) => {
+          dispatch(authActions.loginUser(email, password));
+          props.navigation.navigate('Dashbord');
+        }}>
         <AppFormInput
           autoCorret={false}
           autoCapitalize='none'
@@ -45,7 +61,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default withNavigation(LoginScreen);
 
 const styles = StyleSheet.create({
   container: {
