@@ -1,26 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { useSelector } from 'react-redux';
 
 import IconButton from '../UI/buttons/IconButton';
 
 const SignInOrSignUp = (props) => {
-  const { user } = useSelector((state) => ({ ...state }));
-
-  useEffect(() => {
-    if (user.currentUser !== null) {
-      props.navigation.push('Dashbord');
-    }
-  }, [user]);
-
   return (
     <View style={styles.container}>
       <IconButton
         title='Sign in with email'
         icon='email-outline'
         style={styles.email}
-        onPress={() => props.navigation.navigate('Login')}
+        onPress={() => {
+          props.navigation.navigate('Login');
+        }}
       />
       <View style={styles.or}>
         <Text style={styles.orText}>or</Text>

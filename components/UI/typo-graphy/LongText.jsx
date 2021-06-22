@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   longDescription: {
-    lineHeight: 20,
+    lineHeight: 22,
     textAlign: 'left',
   },
 });

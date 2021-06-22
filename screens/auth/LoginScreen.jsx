@@ -12,9 +12,8 @@ import AppTextBold from '../../components/UI/typo-graphy/AppTextBold';
 import authActions from '../../redux/auth/auth.actions';
 
 const LoginScreen = (props) => {
-  let dispatch = useDispatch();
-
   const { user } = useSelector((state) => ({ ...state }));
+  let dispatch = useDispatch();
 
   useEffect(() => {
     if (user.currentUser !== null) {

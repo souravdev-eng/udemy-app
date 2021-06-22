@@ -1,5 +1,12 @@
 import React from 'react';
-import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Dimensions,
+} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 import LightButton from '../UI/buttons/LightButton';
@@ -8,6 +15,7 @@ import FullStarIcon from '../UI/icons/Full-star-icon';
 import LongText from '../UI/typo-graphy/LongText';
 import AppText from '../UI/typo-graphy/AppText';
 import TeacherOverView from '../teacher/TeacherOverView';
+import HalfStar from '../UI/icons/HalfStar';
 
 const CourseList = (item) => {
   const {
@@ -24,7 +32,7 @@ const CourseList = (item) => {
   } = item;
 
   return (
-    <ScrollView>
+    <ScrollView showsHorizontalScrollIndicator={false}>
       <View style={styles.cardContainer}>
         <Image style={styles.cardImage} source={{ uri: imageURL }} />
         <AppText style={styles.cardTitle}>{title}</AppText>
@@ -35,11 +43,11 @@ const CourseList = (item) => {
         <View style={styles.authorContainer}>
           <View style={styles.starContainer}>
             <AppText style={styles.rating}>{ratings}</AppText>
-            <FullStarIcon />
-            <FullStarIcon />
-            <FullStarIcon />
-            <FullStarIcon />
-            <FontAwesome name='star-half-full' size={18} color='#ffc93c' />
+            <View style={styles.ratingContainer}>
+              {[0, 0, 0, 0, 0].map((el, i) =>
+                i < Math.floor(ratings) ? <FullStarIcon /> : <HalfStar />
+              )}
+            </View>
           </View>
 
           <AppText>
@@ -64,7 +72,9 @@ const CourseList = (item) => {
             />
           </View>
         </View>
-        <LongText title='Description' longDescription={longDescription} />
+        <View style={styles.logTextContainer}>
+          <LongText title='Description' longDescription={longDescription} />
+        </View>
         <TeacherOverView author={author} />
       </View>
     </ScrollView>
@@ -72,21 +82,24 @@ const CourseList = (item) => {
 };
 
 export default CourseList;
-// export default connect(null, mapDispatchToProps)(CourseList);
 
 const styles = StyleSheet.create({
   author: {
     color: '#0a81ab',
   },
+  logTextContainer: {
+    width: '98%',
+  },
   bestSellerContainer: {
     backgroundColor: '#ffc93c',
     width: 80,
-    height: 30,
+    height: '2.5%',
     marginVertical: 8,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 3,
   },
+
   buttonGroup: {
     flexDirection: 'row',
     width: '100%',
@@ -96,7 +109,7 @@ const styles = StyleSheet.create({
 
   cardContainer: {
     width: 350,
-    margin: 13,
+    marginHorizontal: 13,
     overflow: 'hidden',
     marginTop: 25,
     justifyContent: 'center',
@@ -149,5 +162,8 @@ const styles = StyleSheet.create({
   rating: {
     color: '#000',
     marginRight: 8,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
   },
 });

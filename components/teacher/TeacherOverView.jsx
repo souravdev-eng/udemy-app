@@ -24,12 +24,14 @@ const TeacherOverView = (props) => {
           <AppText>1556,751 students</AppText>
         </View>
       </View>
-      <LongText>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
-        explicabo quae illo doloremque reiciendis praesentium blanditiis, ad
-        numquam quo perspiciatis, optio sit dicta. Veniam, dolores? Qui,
-        mollitia? Voluptas, facere iste?
-      </LongText>
+      <View style={styles.logText}>
+        <LongText>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
+          explicabo quae illo doloremque reiciendis praesentium blanditiis, ad
+          numquam quo perspiciatis, optio sit dicta. Veniam, dolores? Qui,
+          mollitia? Voluptas, facere iste?
+        </LongText>
+      </View>
       <View style={styles.buttonContainer}>
         <LightButton
           title='View profile'
@@ -45,6 +47,9 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
     alignSelf: 'flex-start',
+  },
+  logText: {
+    width: '98%',
   },
   title: {
     fontSize: 24,

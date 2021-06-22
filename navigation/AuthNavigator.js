@@ -1,7 +1,3 @@
-import React from 'react';
-
-import { useSelector } from 'react-redux';
-
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import AccountScreen from '../screens/AccountScreen';

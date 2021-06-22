@@ -1,12 +1,21 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
 import BottamNavigator from './navigation/BottamNavigator';
-import store from './redux/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, pristore } from './redux/store';
+import SearchResult from './components/search-result';
+import SearchScreen from './screens/SearchScreen';
 
-export default function App() {
+const App = () => {
   return (
     <Provider store={store}>
-      <BottamNavigator />
+      <PersistGate loading={null} persistor={pristore}>
+        {/* <SearchResult /> */}
+        {/* <SearchScreen /> */}
+        <BottamNavigator />
+      </PersistGate>
     </Provider>
   );
-}
+};
+
+export default App;

@@ -39,9 +39,10 @@ const CardList = (props) => {
               }}
             />
           )}
-          keyExtractor={(item, index) => item._id}
+          keyExtractor={(item) => item._id}
           horizontal
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
         />
 
         <Text style={styles.tag}>Feacherd</Text>

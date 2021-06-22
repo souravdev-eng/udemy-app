@@ -1,2 +1,2 @@
 export const LOOG_IN = 'LOOG_IN';
-export const CURRENT_USER = 'CURRENT_USER';
+export const LOOGED_OUT = 'LOOGED_OUT';

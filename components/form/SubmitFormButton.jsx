@@ -3,7 +3,6 @@ import { useFormikContext } from 'formik';
 import { StyleSheet } from 'react-native';
 
 import DarkButton from '../UI/buttons/DarkButton';
-import { colors } from '../../config/colors';
 
 const SubmitFormButton = ({ title, ...othersProps }) => {
   const { handleSubmit } = useFormikContext();
