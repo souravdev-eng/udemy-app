@@ -34,6 +34,12 @@ const DashbordScreen = (props) => {
           props.navigation.navigate('Home');
         }}
       />
+      <Button
+        title='Create a new course'
+        onPress={() => {
+          props.navigation.navigate('NewCourse');
+        }}
+      />
     </View>
   );
 };

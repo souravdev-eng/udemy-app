@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, pristore } from './redux/store';
 import SearchResult from './components/search-result';
 import SearchScreen from './screens/SearchScreen';
+import CreateCourseScreen from './screens/teacher/courses/create-course-screen';
 
 const App = () => {
   return (
@@ -12,7 +13,8 @@ const App = () => {
       <PersistGate loading={null} persistor={pristore}>
         {/* <SearchResult /> */}
         {/* <SearchScreen /> */}
-        <BottamNavigator />
+        <CreateCourseScreen />
+        {/* <BottamNavigator /> */}
       </PersistGate>
     </Provider>
   );
